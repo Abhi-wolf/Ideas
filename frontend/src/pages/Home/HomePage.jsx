@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+// import { Link, NavLink } from "react-router-dom";
 import { Suspense, lazy, useState } from "react";
 
 import IdeaPic from "../../assets/download.png";
