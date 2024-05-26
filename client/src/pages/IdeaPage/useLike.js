@@ -18,21 +18,21 @@ export function useLike() {
   });
 
   // LIKE EVENT
-  useEffect(() => {
-    socket.on("likeUpdate", (data) => {
-      const prev = queryClient.getQueryData(["idea", data?.ideaId]);
+  // useEffect(() => {
+  //   socket.on("likeUpdate", (data) => {
+  //     const prev = queryClient.getQueryData(["idea", data?.ideaId]);
 
-      if (prev) {
-        const newData = { ...prev, likes: data.likes };
-        queryClient.setQueryData(["idea", data?.ideaId], newData);
-      }
-    });
+  //     if (prev) {
+  //       const newData = { ...prev, likes: data.likes };
+  //       queryClient.setQueryData(["idea", data?.ideaId], newData);
+  //     }
+  //   });
 
-    // Clean up the socket listener on unmount
-    return () => {
-      socket.off("likeUpdate");
-    };
-  }, [queryClient]);
+  //   // Clean up the socket listener on unmount
+  //   return () => {
+  //     socket.off("likeUpdate");
+  //   };
+  // }, [queryClient]);
 
   return { likeIdea, isPending, error };
 }

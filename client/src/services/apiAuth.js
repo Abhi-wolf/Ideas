@@ -58,7 +58,6 @@ export async function logout({ data }) {
       withCredentials: true,
     });
     user = res?.data?.data;
-    console.log(res);
   } catch (err) {
     console.log(err);
     if (err.response?.data?.message) {
