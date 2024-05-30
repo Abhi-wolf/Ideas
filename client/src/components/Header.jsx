@@ -19,7 +19,6 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log("lgoot");
     logout(
       {},
       {

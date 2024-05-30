@@ -76,7 +76,7 @@ function AddIdeaForm({ isOpen, onClose }) {
             type="text"
             placeholder="@username"
             className="text-md md:text-lg text-blue-400"
-            value={`@${user}`}
+            value={`${user}`}
             onChange={(e) => setUser(e.target.value.split(" ")[0])}
           />
         </div>

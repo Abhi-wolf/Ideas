@@ -4,7 +4,6 @@ const User = require("../models/userModel");
 const isAuthenticated = async (req, res, next) => {
   try {
     const { token } = req.cookies;
-    console.log("token = ", token);
 
     if (!token) {
       return res

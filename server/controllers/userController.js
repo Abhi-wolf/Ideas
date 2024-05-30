@@ -15,8 +15,6 @@ const registerUser = async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    console.log("user = ", user);
-
     //   409 for conflict
     if (user) {
       return res
@@ -25,7 +23,6 @@ const registerUser = async (req, res) => {
     }
 
     const newuser = await User.create({ email, name, password });
-    console.log("newUser = ", newuser);
 
     res.status(200).json({
       success: true,
@@ -41,7 +38,6 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
 
     if (!email || !password) {
       return res
@@ -70,7 +66,6 @@ const loginUser = async (req, res) => {
       expiresIn: "7d",
     });
 
-    console.log("token is : ", token);
     const { _id: id, name } = user;
     const data = { id, name };
     return res
@@ -88,7 +83,6 @@ const loginUser = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
-    console.log("logout");
     return res.status(201).clearCookie("token").json({
       success: true,
       message: "Successfull",
@@ -99,7 +93,6 @@ const logout = async (req, res) => {
   }
 };
 
-// TODO : CHECK IF THE ID FROM TOKEN AND ID IN BODY ARE SAME
 const getBookMarks = async (req, res) => {
   try {
     const { id } = req.user;
@@ -121,8 +114,6 @@ const getUser = async (req, res) => {
   try {
     //first  find the user:
     const { id } = req.params;
-    // console.log(id);
-    // console.log(req.body);
 
     const user = await User.findById(id).select("-password");
 
@@ -133,8 +124,6 @@ const getUser = async (req, res) => {
         message: "User Not Found",
       });
     }
-
-    // console.log(user);
 
     //send response:
     res.status(200).send({
@@ -157,7 +146,6 @@ const updateUser = async (req, res) => {
     // first  find the user:
     const { id } = req.user;
     const user = await User.findById(id);
-    console.log("body", req.body);
     //validation of the user:
     if (!user) {
       return res.status(404).json({
@@ -167,7 +155,6 @@ const updateUser = async (req, res) => {
     }
 
     const pass = req.body?.password;
-    console.log("pass = ", pass);
 
     if (req.body?.name) {
       user.name = req.body.name;
@@ -177,18 +164,11 @@ const updateUser = async (req, res) => {
       user.password = req.body.password;
     }
 
-    // const updatedUser = await User.findByIdAndUpdate(id, req.body, {
-    //   new: true,
-    //   runValidators: true,
-    //   useFindAndModify: false,
-    // }).select("-password");
-
     user.save();
 
     return res.status(200).json({
       message: "update successful",
       success: true,
-      // data: updatedUser,
     });
   } catch (err) {
     console.log(err);

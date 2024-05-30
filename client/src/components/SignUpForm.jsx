@@ -18,7 +18,6 @@ function SignUpForm() {
   const { register, reset, handleSubmit } = useForm();
   const { signUp, isPending } = useSignUp();
   const navigate = useNavigate();
-  console.log("isloading = ", isPending);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -86,9 +85,6 @@ function SignUpForm() {
               Create an account
             </Button>
           </form>
-          <Button variant="outline" className="w-full">
-            Sign up with Google
-          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}

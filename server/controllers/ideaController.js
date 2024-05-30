@@ -6,9 +6,6 @@ const likeIdea = async (req, res) => {
     const { id: ideaId } = req.body;
     const { id } = req.user;
 
-    console.log("ideaid = ", ideaId);
-    console.log("id = ", id);
-
     const idea = await Idea.findById({ _id: ideaId });
 
     if (!idea) {
@@ -154,6 +151,8 @@ const bookMarkIdea = async (req, res) => {
     }
 
     await user.save();
+
+    console.log("user = ", user);
 
     res.status(200).json({ success: true });
   } catch (error) {

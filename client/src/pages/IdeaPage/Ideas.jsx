@@ -5,6 +5,7 @@ import { useGetIdeas } from "../Home/useGetIdeas";
 import Spinner from "@/components/Spinner";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useGetBookMarks } from "../Home/userGetBookMarks";
+import NoDataMessage from "@/components/NoDataMessage";
 
 function Ideas() {
   const { Ideas, isLoading, error } = useGetIdeas();
@@ -12,10 +13,11 @@ function Ideas() {
 
   if (isLoading || isLoadingBookmarks) {
     return <Spinner />;
-  }
-  if (error) {
+  } else if (error) {
     toast.error(error?.message);
     return <ErrorMessage errorMessage={error?.message} />;
+  } else if (Ideas.length == 0) {
+    return <NoDataMessage message="No ideas found" />;
   }
 
   return (
